@@ -2,7 +2,7 @@ from scraper.scraper_books import BookScraper
 from scraper.scraper_custom import ProductScraper
 from scraper.exporter import export_books_to_csv
 from analysis.stats import (
-    load_books,
+    load_data,
     price_clustering,
     summary_by_cluster,
     plot_price_histogram,
@@ -22,7 +22,7 @@ def main():
 
     export_books_to_csv(books, "data/books.csv")
 
-    df = load_books("data/books.csv")
+    df = load_data("data/books.csv")
 
     df = price_clustering(df)
 
