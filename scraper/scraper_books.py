@@ -29,7 +29,7 @@ class BookScraper:
             try:
                 price = float(price_clean)
             except ValueError:
-                price = 0.0  # fallback si erreur
+                price = 0.0  
 
             availability = article.select_one('.availability').text.strip()
             rating = article.p.get('class')[1] if article.p and 'class' in article.p.attrs else 'Unrated'

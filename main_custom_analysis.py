@@ -26,12 +26,12 @@ def main():
     csv_path = "data/custom/custom_products.csv"
     scraper.export_to_csv(products, csv_path)
 
-    # ✅ Load raw CSV to fix bad price formatting first
+   
     raw_df = pd.read_csv(csv_path)
     raw_df['price'] = raw_df['price'].astype(str).str.replace('..', '.', regex=False)
-    raw_df.to_csv(csv_path, index=False)  # Overwrite with cleaned prices
+    raw_df.to_csv(csv_path, index=False)  
 
-    # ✅ Now use the normal load_data which expects clean prices
+    
     df = load_data(csv_path)
 
     if df.empty:
@@ -43,7 +43,7 @@ def main():
     print("\n=== Résumé par cluster de prix ===")
     print(summary_by_cluster(df))
 
-    # Generate and save visualizations (same as books)
+
     plot_price_histogram(df, filename="data/custom/histogram_price_custom.png")
     plot_price_boxplot(df, filename="data/custom/boxplot_price_custom.png")
     plot_price_clusters(df, filename="data/custom/clustering_price_custom.png")
