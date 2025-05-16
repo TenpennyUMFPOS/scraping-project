@@ -16,14 +16,14 @@ def main():
 
     base_url = "https://www.amazon.com/s?k=exterior+lamps"  
     scraper = ProductScraper(base_url)
-    print("🛠️ Starting scraping custom products...")
+    print(" Starting scraping custom products...")
     products = scraper.scrape_all(max_pages=5)
 
     if not products:
         print("No products scraped. Exiting.")
         return
 
-    csv_path = "data/custom/custom_products.csv"
+    csv_path = "data/custom_products.csv"
     scraper.export_to_csv(products, csv_path)
 
    
@@ -44,12 +44,12 @@ def main():
     print(summary_by_cluster(df))
 
 
-    plot_price_histogram(df, filename="data/custom/histogram_price_custom.png")
-    plot_price_boxplot(df, filename="data/custom/boxplot_price_custom.png")
-    plot_price_clusters(df, filename="data/custom/clustering_price_custom.png")
-    plot_cluster_distribution(df, filename="data/custom/cluster_boxplot_custom.png")
+    plot_price_histogram(df, filename="data/histogram_price_custom.png")
+    plot_price_boxplot(df, filename="data/boxplot_price_custom.png")
+    plot_price_clusters(df, filename="data/clustering_price_custom.png")
+    plot_cluster_distribution(df, filename="data/cluster_boxplot_custom.png")
 
-    print("\n✅ Visualisations enregistrées dans le dossier 'data/custom/'.")
+    print("\n Visualisations enregistrées dans le dossier 'data/'.")
 
 if __name__ == "__main__":
     main()

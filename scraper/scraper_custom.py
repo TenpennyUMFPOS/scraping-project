@@ -44,19 +44,15 @@ class ProductScraper:
         soup = BeautifulSoup(response.text, 'html.parser')
         products = []
 
-        # Select product containers by your updated div class
         product_sections = soup.select('div.a-section.a-spacing-base')
 
         for section in product_sections:
-            # Extract title
             title_tag = section.select_one('h2.a-size-base-plus.a-spacing-none.a-color-base.a-text-normal')
             title = title_tag.get_text(strip=True) if title_tag else None
 
-            # Extract image URL
             img_tag = section.select_one('img.s-image')
             img_url = img_tag['src'] if img_tag and img_tag.has_attr('src') else None
 
-            # Extract price parts
             price_whole = section.select_one('span.a-price-whole')
             price_fraction = section.select_one('span.a-price-fraction')
 
