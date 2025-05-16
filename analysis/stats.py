@@ -5,11 +5,8 @@ import os
 
 def load_data(filepath: str) -> pd.DataFrame:
     df = pd.read_csv(filepath)
-
     df['price'] = df['price'].astype(str).str.replace('Â', '', regex=False)
     df['price'] = df['price'].str.replace('£', '', regex=False)
-
-
     df['price'] = pd.to_numeric(df['price'], errors='coerce')
     df = df.dropna(subset=['price'])
     df['price'] = df['price'].astype(float)
@@ -75,3 +72,12 @@ def plot_cluster_distribution(df: pd.DataFrame, filename="data/cluster_boxplot.p
     plt.tight_layout()
     plt.savefig(filename)
     plt.close()
+
+def availability_counts(df: pd.DataFrame) -> pd.DataFrame:
+    df['is_available'] = df['availability'].str.contains("In stock", case=False, na=False)
+    counts = df.groupby(['rating', 'is_available']).size().unstack(fill_value=0)
+    counts.columns = ['Non disponible', 'Disponible']
+    return counts
+
+def summary_by_rating(df: pd.DataFrame) -> pd.DataFrame:
+    return df.groupby('rating')['price'].mean().rename("Prix moyen").to_frame()
